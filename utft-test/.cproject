@@ -51,6 +51,9 @@
 								<option id="de.innot.avreclipse.compiler.option.language.ubitfields.697982760" name="bitfields are unsigned (-funsigned-bitfields)" superClass="de.innot.avreclipse.compiler.option.language.ubitfields" value="false" valueType="boolean"/>
 								<option id="de.innot.avreclipse.compiler.option.nowarn.1028540979" name="No Warnings (-w)" superClass="de.innot.avreclipse.compiler.option.nowarn" value="true" valueType="boolean"/>
 								<option id="de.innot.avreclipse.compiler.option.allwarn.2091280620" name="All Warnings (-Wall)" superClass="de.innot.avreclipse.compiler.option.allwarn" value="false" valueType="boolean"/>
+								<option id="de.innot.avreclipse.compiler.option.def.1726229430" superClass="de.innot.avreclipse.compiler.option.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="ARDUINO=165-r5"/>
+								</option>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.29001900" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.cppcompiler.app.debug.2133321329" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.app.debug">
@@ -68,6 +71,9 @@
 								<option id="de.innot.avreclipse.cppcompiler.option.optimize.other.361694076" name="Other Optimization Flags" superClass="de.innot.avreclipse.cppcompiler.option.optimize.other" value="-ffunction-sections -fdata-sections" valueType="string"/>
 								<option id="de.innot.avreclipse.cppcompiler.option.allwarn.1366773381" name="All Warnings (-Wall)" superClass="de.innot.avreclipse.cppcompiler.option.allwarn" value="false" valueType="boolean"/>
 								<option id="de.innot.avreclipse.cppcompiler.option.nowarn.547037051" name="No Warnings (-w)" superClass="de.innot.avreclipse.cppcompiler.option.nowarn" value="true" valueType="boolean"/>
+								<option id="de.innot.avreclipse.cppcompiler.option.def.1101158125" superClass="de.innot.avreclipse.cppcompiler.option.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="ARDUINO=165-r5"/>
+								</option>
 								<inputType id="de.innot.avreclipse.cppcompiler.input.781448577" superClass="de.innot.avreclipse.cppcompiler.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.linker.winavr.app.debug.1537478777" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.app.debug"/>
@@ -141,6 +147,9 @@
 								<option id="de.innot.avreclipse.compiler.option.optimize.other.225850295" name="Other Optimization Flags" superClass="de.innot.avreclipse.compiler.option.optimize.other" value="-ffunction-sections -fdata-sections" valueType="string"/>
 								<option id="de.innot.avreclipse.compiler.option.language.uchar.1228027127" name="char is unsigned (-funsigned-char)" superClass="de.innot.avreclipse.compiler.option.language.uchar" value="false" valueType="boolean"/>
 								<option id="de.innot.avreclipse.compiler.option.language.ubitfields.100951458" name="bitfields are unsigned (-funsigned-bitfields)" superClass="de.innot.avreclipse.compiler.option.language.ubitfields" value="false" valueType="boolean"/>
+								<option id="de.innot.avreclipse.compiler.option.def.749262242" superClass="de.innot.avreclipse.compiler.option.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="ARDUINO=165-r5"/>
+								</option>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.1567249607" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.cppcompiler.app.debug.51982270" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.app.debug">
@@ -156,6 +165,9 @@
 								<option id="de.innot.avreclipse.cppcompiler.option.language.uchar.1578952595" name="char is unsigned (-funsigned-char)" superClass="de.innot.avreclipse.cppcompiler.option.language.uchar" value="false" valueType="boolean"/>
 								<option id="de.innot.avreclipse.cppcompiler.option.language.ubitfields.1286268432" name="bitfields are unsigned (-funsigned-bitfields)" superClass="de.innot.avreclipse.cppcompiler.option.language.ubitfields" value="false" valueType="boolean"/>
 								<option id="de.innot.avreclipse.cppcompiler.option.optimize.other.36208296" name="Other Optimization Flags" superClass="de.innot.avreclipse.cppcompiler.option.optimize.other" value="-ffunction-sections -fdata-sections" valueType="string"/>
+								<option id="de.innot.avreclipse.cppcompiler.option.def.981547643" superClass="de.innot.avreclipse.cppcompiler.option.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="ARDUINO=165-r5"/>
+								</option>
 								<inputType id="de.innot.avreclipse.cppcompiler.input.1125690731" superClass="de.innot.avreclipse.cppcompiler.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.linker.winavr.app.debug.347768388" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.app.debug"/>
@@ -197,10 +209,11 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration configurationName="Debug">
+		<configuration configurationName="2560_16MHz">
 			<resource resourceType="PROJECT" workspacePath="/utft-test"/>
 		</configuration>
-		<configuration configurationName="2560_16MHz">
+		<configuration configurationName="328P_16MHz"/>
+		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/utft-test"/>
 		</configuration>
 	</storageModule>

@@ -3,6 +3,8 @@
 	<name>Adafruit_ILI_9341_8bit_AS</name>
 	<comment></comment>
 	<projects>
+		<project>Adafruit_GFX_AS</project>
+		<project>ArduinoCore</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
