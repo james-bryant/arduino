@@ -40,7 +40,7 @@ unsigned long DS1307RTC::get()   // Aquire data from buffer and convert to time_
   return(makeTime(tm));
 }
 
-bool DS1307RTC::set(time_t t)
+bool DS1307RTC::set(unsigned long t)
 {
   tmElements_t tm;
   breakTime(t, tm);

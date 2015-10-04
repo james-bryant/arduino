@@ -16,7 +16,7 @@ class DS1307RTC
   public:
     DS1307RTC();
     static unsigned long get();
-    static bool set(time_t t);
+    static bool set(unsigned long t);
     static bool read(tmElements_t &tm);
     static bool write(tmElements_t &tm);
     static bool chipPresent() { return exists; }
