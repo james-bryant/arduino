@@ -1,0 +1,7 @@
+Added UNO TFT LCD Shield 2.4", SPFD5408A controller (UNO_24 or SPFD5408A)
+Added UNO TFT LCD Shield 2.6", SPFD5408B controller (UNO_26 or SPFD5408B)
+Added USE_UNO_SHIELD_1IN1 (must enable in HW_AVR_defines.h, added and tested only on UNO and Mega)
+Variable minimized
+
+Example:
+simple load the examples\Arduino (AVR)\UTFT_UNO_Demo_320x240\UTFT_UNO_Demo_320x240.pde
