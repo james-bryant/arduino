@@ -3,8 +3,6 @@
 	<name>UTouch</name>
 	<comment></comment>
 	<projects>
-		<project>Adafruit_GFX_AS</project>
-		<project>ArduinoCore</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
