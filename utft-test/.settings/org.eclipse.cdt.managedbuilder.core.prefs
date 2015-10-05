@@ -7,6 +7,14 @@ environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.
 environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1520150553/C_INCLUDE_PATH/operation=remove
 environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1520150553/append=true
 environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1520150553/appendContributed=true
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/CPATH/delimiter=;
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/CPATH/operation=remove
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/CPLUS_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/CPLUS_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/C_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/C_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/append=true
+environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/appendContributed=true
 environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397/CPATH/delimiter=;
 environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397/CPATH/operation=remove
 environment/buildEnvironmentInclude/de.innot.avreclipse.configuration.app.debug.1017530397/CPLUS_INCLUDE_PATH/delimiter=;
@@ -19,6 +27,10 @@ environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.
 environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397.1520150553/LIBRARY_PATH/operation=remove
 environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397.1520150553/append=true
 environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397.1520150553/appendContributed=true
+environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/LIBRARY_PATH/delimiter=;
+environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/LIBRARY_PATH/operation=remove
+environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/append=true
+environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397.1704427469/appendContributed=true
 environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397/LIBRARY_PATH/delimiter=;
 environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397/LIBRARY_PATH/operation=remove
 environment/buildEnvironmentLibrary/de.innot.avreclipse.configuration.app.debug.1017530397/append=true

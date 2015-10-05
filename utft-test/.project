@@ -3,8 +3,6 @@
 	<name>utft-test</name>
 	<comment></comment>
 	<projects>
-		<project>ArduinoCore</project>
-		<project>UTFT</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
