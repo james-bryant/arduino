@@ -119,7 +119,7 @@ void UTFT::_set_direction_registers(byte mode)
 		PORTB_PCR19 = PORT_PCR_SRE | PORT_PCR_DSE | PORT_PCR_MUX(1);
     }
 }
-void UTFT::_fast_fill_16(int ch, int cl, long pix)
+void UTFT::_fast_fill_16(int ch, int cl, long pix, byte mode)
 {
 	long blocks;
 
@@ -154,7 +154,7 @@ void UTFT::_fast_fill_16(int ch, int cl, long pix)
 		}
 }
 
-void UTFT::_fast_fill_8(int ch, long pix)
+void UTFT::_fast_fill_8(int ch, long pix, byte mode)
 {
 	long blocks;
 

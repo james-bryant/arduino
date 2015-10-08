@@ -15,11 +15,12 @@ class DS1307RTC
   // user-accessible "public" interface
   public:
     DS1307RTC();
-    static unsigned long get();
-    static bool set(unsigned long t);
+    static ard_time_t get();
+    static bool set(ard_time_t t);
     static bool read(tmElements_t &tm);
     static bool write(tmElements_t &tm);
     static bool chipPresent() { return exists; }
+    static float getTemperature();
 
   private:
     static bool exists;

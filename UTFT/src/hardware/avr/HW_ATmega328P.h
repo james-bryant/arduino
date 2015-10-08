@@ -71,6 +71,12 @@ void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
 		PORTD = VL;
 		pulse_low(P_WR, B_WR);
 		break;
+	case PORTDB_8:
+		sbi(P_WR, B_WR);
+	    PORTD = (PORTD & B00000011) | ((VL)& B11111100);
+	    PORTB = (PORTB & B11111100) | ((VL)& B00000011);
+	    pulse_low(P_WR, B_WR);
+		break;
 	case 16:
 		PORTD = VH;
 		cport(PORTC, 0xFC);
@@ -92,16 +98,23 @@ void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
 
 void UTFT::_set_direction_registers(byte mode)
 {
-	DDRD = 0xFF;
+	if (mode != PORTDB_8) DDRD = 0xFF;
+
 	if (mode==16)
 	{
 		DDRB |= 0x3F;
 		DDRC |= 0x03;
 	}
 
+	if (mode == PORTDB_8) {
+		for(int p=2;p<10;p++)
+	 	 {
+		    pinMode(p,OUTPUT);
+		 }
+	}
 }
 
-void UTFT::_fast_fill_16(int ch, int cl, long pix)
+void UTFT::_fast_fill_16(int ch, int cl, long pix, byte mode)
 {
 	long blocks;
 
@@ -137,11 +150,16 @@ void UTFT::_fast_fill_16(int ch, int cl, long pix)
 		}
 }
 
-void UTFT::_fast_fill_8(int ch, long pix)
+void UTFT::_fast_fill_8(int ch, long pix, byte mode)
 {
 	long blocks;
 
-	PORTD = ch;
+	if (mode != PORTDB_8) {
+		PORTD = ch;
+	} else {
+  		PORTB = ch & 0x3;
+  		PORTD = ch & 0xFC;
+	}
 
 	blocks = pix/16;
 	for (int i=0; i<blocks; i++)

@@ -139,7 +139,7 @@ void UTFT::_set_direction_registers(byte mode)
 	}
 }
 
-void UTFT::_fast_fill_16(int ch, int cl, long pix)
+void UTFT::_fast_fill_16(int ch, int cl, long pix, byte mode)
 {
 	long blocks;
 
@@ -182,7 +182,7 @@ void UTFT::_fast_fill_16(int ch, int cl, long pix)
 		}
 }
 
-void UTFT::_fast_fill_8(int ch, long pix)
+void UTFT::_fast_fill_8(int ch, long pix, byte mode)
 {
 	long blocks;
 

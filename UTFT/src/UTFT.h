@@ -81,6 +81,9 @@
 #define CPLD			29
 #define HX8353C			30
 #define ST7735_ALT		31
+#define SPFD5408A		32
+#define SPFD5408B		33
+#define ILI9341_8		34  // ILI9341  (8bit)
 
 #define ITDB32			0	// HX8347-A (16bit)
 #define ITDB32WC		1	// ILI9327  (16bit)
@@ -140,10 +143,13 @@
 #define CTE70CPLD		29	// CPLD		(16bit)
 #define DMTFT18101      30  // HX8353C  (Serial 5Pin)
 #define TFT18SHLD		31	// ST7735	(Serial 5Pin) Alternative Init
+#define UNO_24			32	// SPFD5408A	(8bit)
+#define UNO_26			33	// SPFD5408B	(8bit)
 
 #define SERIAL_4PIN		4
 #define SERIAL_5PIN		5
 #define LATCHED_16		17
+#define PORTDB_8		9
 
 #define NOTINUSE		255
 
@@ -263,8 +269,8 @@ class UTFT
 		void clrXY();
 		void rotateChar(byte c, int x, int y, int pos, int deg);
 		void _set_direction_registers(byte mode);
-		void _fast_fill_16(int ch, int cl, long pix);
-		void _fast_fill_8(int ch, long pix);
+		void _fast_fill_16(int ch, int cl, long pix, byte mode);
+		void _fast_fill_8(int ch, long pix, byte mode);
 		void _convert_float(char *buf, double num, int width, byte prec);
 
 #if defined(ENERGIA)

@@ -16,6 +16,9 @@
 #include <sys/types.h> // for __time_t_defined, but avr libc lacks sys/types.h
 #endif
 
+// Time type specific to this library
+typedef unsigned long ard_time_t;
+
 // This ugly hack allows us to define C++ overloaded functions, when included
 // from within an extern "C", as newlib's sys/stat.h does.  Actually it is
 // intended to include "time.h" from the C library (on ARM, but AVR does not
@@ -82,7 +85,7 @@ typedef time_t(*getExternalTime)();
 #define nextSunday(_time_) ( previousSunday(_time_)+SECS_PER_WEEK)          // time at the end of the week for the given time
 
 
-/* Useful Macros for converting elapsed time to a time_t */
+/* Useful Macros for converting elapsed time to a ard_time_t */
 #define minutesToTime_t ((M)) ( (M) * SECS_PER_MIN)  
 #define hoursToTime_t   ((H)) ( (H) * SECS_PER_HOUR)  
 #define daysToTime_t    ((D)) ( (D) * SECS_PER_DAY) // fixed on Jul 22 2011
@@ -91,28 +94,28 @@ typedef time_t(*getExternalTime)();
 /*============================================================================*/
 /*  time and date functions   */
 int     hour();            // the hour now 
-int     hour(time_t t);    // the hour for the given time
+int     hour(ard_time_t t);    // the hour for the given time
 int     hourFormat12();    // the hour now in 12 hour format
-int     hourFormat12(time_t t); // the hour for the given time in 12 hour format
+int     hourFormat12(ard_time_t t); // the hour for the given time in 12 hour format
 uint8_t isAM();            // returns true if time now is AM
-uint8_t isAM(time_t t);    // returns true the given time is AM
+uint8_t isAM(ard_time_t t);    // returns true the given time is AM
 uint8_t isPM();            // returns true if time now is PM
-uint8_t isPM(time_t t);    // returns true the given time is PM
+uint8_t isPM(ard_time_t t);    // returns true the given time is PM
 int     minute();          // the minute now 
-int     minute(time_t t);  // the minute for the given time
+int     minute(ard_time_t t);  // the minute for the given time
 int     second();          // the second now 
-int     second(time_t t);  // the second for the given time
+int     second(ard_time_t t);  // the second for the given time
 int     day();             // the day now 
-int     day(time_t t);     // the day for the given time
+int     day(ard_time_t t);     // the day for the given time
 int     weekday();         // the weekday now (Sunday is day 1) 
-int     weekday(time_t t); // the weekday for the given time 
+int     weekday(ard_time_t t); // the weekday for the given time
 int     month();           // the month now  (Jan is month 1)
-int     month(time_t t);   // the month for the given time
+int     month(ard_time_t t);   // the month for the given time
 int     year();            // the full four digit year: (2009, 2010 etc) 
-int     year(time_t t);    // the year for the given time
+int     year(ard_time_t t);    // the year for the given time
 
 unsigned long now();              // return the current time as seconds since Jan 1 1970
-void    setTime(time_t t);
+void    setTime(ard_time_t t);
 void    setTime(int hr,int min,int sec,int day, int month, int yr);
 void    adjustTime(long adjustment);
 
@@ -126,11 +129,11 @@ char* dayShortStr(uint8_t day);
 /* time sync functions	*/
 timeStatus_t timeStatus(); // indicates if time has been set and recently synchronized
 void    setSyncProvider( getExternalTime getTimeFunction); // identify the external time provider
-void    setSyncInterval(time_t interval); // set the number of seconds between re-sync
+void    setSyncInterval(ard_time_t interval); // set the number of seconds between re-sync
 
 /* low level functions to convert to and from system time                     */
-void breakTime(time_t time, tmElements_t &tm);  // break time_t into elements
-unsigned long makeTime(tmElements_t &tm);  // convert time elements into time_t
+void breakTime(ard_time_t time, tmElements_t &tm);  // break ard_time_t into elements
+unsigned long makeTime(tmElements_t &tm);  // convert time elements into ard_time_t
 
 } // extern "C++"
 #endif // __cplusplus

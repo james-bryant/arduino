@@ -33,14 +33,14 @@ DS1307RTC::DS1307RTC()
 }
   
 // PUBLIC FUNCTIONS
-unsigned long DS1307RTC::get()   // Aquire data from buffer and convert to time_t
+ard_time_t DS1307RTC::get()   // Aquire data from buffer and convert to time_t
 {
   tmElements_t tm;
   if (read(tm) == false) return 0;
   return(makeTime(tm));
 }
 
-bool DS1307RTC::set(unsigned long t)
+bool DS1307RTC::set(ard_time_t t)
 {
   tmElements_t tm;
   breakTime(t, tm);
@@ -121,6 +121,20 @@ bool DS1307RTC::write(tmElements_t &tm)
   exists = true;
   return true;
 }
+
+float DS1307RTC::getTemperature() {
+	// Checks the internal thermometer on the DS3231 and returns the
+	// temperature as a floating-point value.
+	uint8_t temp;
+	Wire.beginTransmission(DS1307_CTRL_ID);
+	Wire.write(uint8_t(0x11));
+	Wire.endTransmission();
+
+	Wire.requestFrom(DS1307_CTRL_ID, 2);
+	temp = Wire.read();	// Here's the MSB
+	return float(temp) + 0.25*(Wire.read()>>6);
+}
+
 
 // PRIVATE FUNCTIONS
 

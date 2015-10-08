@@ -66,6 +66,7 @@ void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
 		pulse_low(P_SCL, B_SCL);
 		break;
 	case 8:
+	case PORTDB_8:
 #if defined(USE_UNO_SHIELD_ON_MEGA)
 		PORTG &= ~0x20;
 		PORTG |= (VH & 0x10)<<1;
@@ -137,7 +138,7 @@ void UTFT::_set_direction_registers(byte mode)
 #endif
 }
 
-void UTFT::_fast_fill_16(int ch, int cl, long pix)
+void UTFT::_fast_fill_16(int ch, int cl, long pix, byte mode)
 {
 #if defined(USE_UNO_SHIELD_ON_MEGA)
 	if (ch==cl)
@@ -196,7 +197,7 @@ void UTFT::_fast_fill_16(int ch, int cl, long pix)
 #endif
 }
 
-void UTFT::_fast_fill_8(int ch, long pix)
+void UTFT::_fast_fill_8(int ch, long pix, byte mode)
 {
 	long blocks;
 

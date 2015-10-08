@@ -93,9 +93,9 @@ UTFT::UTFT()
 
 UTFT::UTFT(byte model, int RS, int WR, int CS, int RST, int SER)
 { 
-	word	dsx[] = {239, 239, 239, 239, 239, 239, 175, 175, 239, 127, 127, 239, 271, 479, 239, 239, 239, 0, 0, 239, 479, 319, 239, 175, 127, 239, 239, 319, 319, 799, 127, 127};
-	word	dsy[] = {319, 399, 319, 319, 319, 319, 219, 219, 399, 159, 127, 319, 479, 799, 319, 319, 319, 0, 0, 319, 799, 479, 319, 219, 159, 319, 319, 479, 479, 479, 159, 159};
-	byte	dtm[] = {16, 16, 16, 8, 8, 16, 8, SERIAL_4PIN, 16, SERIAL_5PIN, SERIAL_5PIN, 16, 16, 16, 8, 16, LATCHED_16, 0, 0, 8, 16, 16, 16, 8, SERIAL_5PIN, SERIAL_5PIN, SERIAL_4PIN, 16, 16, 16, SERIAL_5PIN, SERIAL_5PIN};
+	word	dsx[] = {239, 239, 239, 239, 239, 239, 175, 175, 239, 127, 127, 239, 271, 479, 239, 239, 239, 0, 0, 239, 479, 319, 239, 175, 127, 239, 239, 319, 319, 799, 127, 127, 239, 239, 239};
+	word	dsy[] = {319, 399, 319, 319, 319, 319, 219, 219, 399, 159, 127, 319, 479, 799, 319, 319, 319, 0, 0, 319, 799, 479, 319, 219, 159, 319, 319, 479, 479, 479, 159, 159, 319, 319, 319};
+	byte	dtm[] = {16, 16, 16, 8, 8, 16, 8, SERIAL_4PIN, 16, SERIAL_5PIN, SERIAL_5PIN, 16, 16, 16, 8, 16, LATCHED_16, 0, 0, 8, 16, 16, 16, 8, SERIAL_5PIN, SERIAL_5PIN, SERIAL_4PIN, 16, 16, 16, SERIAL_5PIN, SERIAL_5PIN, 8, 8, PORTDB_8};
 
 	disp_x_size =			dsx[model];
 	disp_y_size =			dsy[model];
@@ -169,14 +169,22 @@ void UTFT::LCD_Write_COM(char VL)
 	}
 	else
 		LCD_Writ_Bus(0x00,VL,display_transfer_mode);
+
+	if (display_transfer_mode == PORTDB_8) {
+		sbi(P_RS, B_RS);
+	}
 }
 
 void UTFT::LCD_Write_DATA(char VH,char VL)
 {
-	if (display_transfer_mode!=1)
+	if (display_transfer_mode != 1 && display_transfer_mode != PORTDB_8)
 	{
 		sbi(P_RS, B_RS);
 		LCD_Writ_Bus(VH,VL,display_transfer_mode);
+	}
+	else if (display_transfer_mode == PORTDB_8) {
+		LCD_Writ_Bus(0x00,VH,display_transfer_mode);
+		LCD_Writ_Bus(0x00,VL,display_transfer_mode);
 	}
 	else
 	{
@@ -187,9 +195,12 @@ void UTFT::LCD_Write_DATA(char VH,char VL)
 
 void UTFT::LCD_Write_DATA(char VL)
 {
-	if (display_transfer_mode!=1)
+	if (display_transfer_mode != 1 && display_transfer_mode != PORTDB_8)
 	{
 		sbi(P_RS, B_RS);
+		LCD_Writ_Bus(0x00,VL,display_transfer_mode);
+	}
+	else if (display_transfer_mode == PORTDB_8) {
 		LCD_Writ_Bus(0x00,VL,display_transfer_mode);
 	}
 	else
@@ -306,6 +317,15 @@ void UTFT::InitLCD(byte orientation)
 #ifndef DISABLE_HX8353C
 	#include "tft_drivers/hx8353c/initlcd.h"
 #endif
+#ifndef DISABLE_SPFD5408A
+	#include "tft_drivers/spfd5408a/initlcd.h"
+#endif
+#ifndef DISABLE_SPFD5408B
+	#include "tft_drivers/spfd5408b/initlcd.h"
+#endif
+#ifndef DISABLE_ILI9341_8
+	#include "tft_drivers/ili9341_8/initlcd.h"
+#endif
 	}
 
 	sbi (P_CS, B_CS); 
@@ -407,6 +427,15 @@ void UTFT::setXY(word x1, word y1, word x2, word y2)
 #ifndef DISABLE_HX8353C
 	#include "tft_drivers/hx8353c/setxy.h"
 #endif
+#ifndef DISABLE_SPFD5408A
+	#include "tft_drivers/spfd5408a/setxy.h"
+#endif
+#ifndef DISABLE_SPFD5408B
+	#include "tft_drivers/spfd5408b/setxy.h"
+#endif
+#ifndef DISABLE_ILI9341_8
+	#include <tft_drivers/ili9341_8/setxy.h>
+#endif
 	}
 }
 
@@ -473,7 +502,7 @@ void UTFT::fillRect(int x1, int y1, int x2, int y2)
 		cbi(P_CS, B_CS);
 		setXY(x1, y1, x2, y2);
 		sbi(P_RS, B_RS);
-		_fast_fill_16(fch,fcl,((long(x2-x1)+1)*(long(y2-y1)+1)));
+		_fast_fill_16(fch,fcl,((long(x2-x1)+1)*(long(y2-y1)+1)), display_transfer_mode);
 		sbi(P_CS, B_CS);
 	}
 	else if ((display_transfer_mode==8) and (fch==fcl))
@@ -481,7 +510,7 @@ void UTFT::fillRect(int x1, int y1, int x2, int y2)
 		cbi(P_CS, B_CS);
 		setXY(x1, y1, x2, y2);
 		sbi(P_RS, B_RS);
-		_fast_fill_8(fch,((long(x2-x1)+1)*(long(y2-y1)+1)));
+		_fast_fill_8(fch,((long(x2-x1)+1)*(long(y2-y1)+1)), display_transfer_mode);
 		sbi(P_CS, B_CS);
 	}
 	else
@@ -606,17 +635,17 @@ void UTFT::clrScr()
 	
 	cbi(P_CS, B_CS);
 	clrXY();
-	if (display_transfer_mode!=1)
+	if (display_transfer_mode != 1 && display_transfer_mode != PORTDB_8)
 		sbi(P_RS, B_RS);
 	if (display_transfer_mode==16)
-		_fast_fill_16(0,0,((disp_x_size+1)*(disp_y_size+1)));
+		_fast_fill_16(0,0,((disp_x_size+1)*(disp_y_size+1)), display_transfer_mode);
 	else if (display_transfer_mode==8)
-		_fast_fill_8(0,((disp_x_size+1)*(disp_y_size+1)));
+		_fast_fill_8(0,((disp_x_size+1)*(disp_y_size+1)), display_transfer_mode);
 	else
 	{
 		for (i=0; i<((disp_x_size+1)*(disp_y_size+1)); i++)
 		{
-			if (display_transfer_mode!=1)
+			if (display_transfer_mode!=1 && display_transfer_mode != PORTDB_8)
 				LCD_Writ_Bus(0,0,display_transfer_mode);
 			else
 			{
@@ -644,17 +673,17 @@ void UTFT::fillScr(word color)
 
 	cbi(P_CS, B_CS);
 	clrXY();
-	if (display_transfer_mode!=1)
+	if (display_transfer_mode != 1 && display_transfer_mode != PORTDB_8)
 		sbi(P_RS, B_RS);
 	if (display_transfer_mode==16)
-		_fast_fill_16(ch,cl,((disp_x_size+1)*(disp_y_size+1)));
+		_fast_fill_16(ch,cl,((disp_x_size+1)*(disp_y_size+1)), display_transfer_mode);
 	else if ((display_transfer_mode==8) and (ch==cl))
-		_fast_fill_8(ch,((disp_x_size+1)*(disp_y_size+1)));
+		_fast_fill_8(ch,((disp_x_size+1)*(disp_y_size+1)), display_transfer_mode);
 	else
 	{
 		for (i=0; i<((disp_x_size+1)*(disp_y_size+1)); i++)
 		{
-			if (display_transfer_mode!=1)
+			if (display_transfer_mode != 1 && display_transfer_mode != PORTDB_8)
 				LCD_Writ_Bus(ch,cl,display_transfer_mode);
 			else
 			{
@@ -789,12 +818,16 @@ void UTFT::drawHLine(int x, int y, int l)
 	if (display_transfer_mode == 16)
 	{
 		sbi(P_RS, B_RS);
-		_fast_fill_16(fch,fcl,l);
+		_fast_fill_16(fch,fcl,l, display_transfer_mode);
 	}
 	else if ((display_transfer_mode==8) and (fch==fcl))
 	{
 		sbi(P_RS, B_RS);
-		_fast_fill_8(fch,l);
+		_fast_fill_8(fch,l, display_transfer_mode);
+	}
+	else if ((display_transfer_mode==PORTDB_8) and (fch==fcl))
+	{
+		_fast_fill_8(fch,l, display_transfer_mode);
 	}
 	else
 	{
@@ -819,12 +852,16 @@ void UTFT::drawVLine(int x, int y, int l)
 	if (display_transfer_mode == 16)
 	{
 		sbi(P_RS, B_RS);
-		_fast_fill_16(fch,fcl,l);
+		_fast_fill_16(fch,fcl,l, display_transfer_mode);
 	}
 	else if ((display_transfer_mode==8) and (fch==fcl))
 	{
 		sbi(P_RS, B_RS);
-		_fast_fill_8(fch,l);
+		_fast_fill_8(fch,l, display_transfer_mode);
+	}
+	else if ((display_transfer_mode==PORTDB_8) and (fch==fcl))
+	{
+		_fast_fill_8(fch,l, display_transfer_mode);
 	}
 	else
 	{
